@@ -1,3 +1,4 @@
+using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using SanzWebApplication.DbContext;
@@ -22,6 +23,18 @@ public class ArticlesController : ControllerBase
     public async Task<IEnumerable<Article>> Get()
     {
         var result = await _context.Articles.ToListAsync();
+        return result;
+    }
+
+    [HttpGet("GetArticles/{id}")]
+    public async Task<Article?> GetArticleById(int id)
+    {
+        var result = await _context.Articles.SingleOrDefaultAsync(i => i.Id == id);
+        if (result == null)
+        {
+            _logger.LogError("No article found with {ID}", id.ToString());
+        }
+
         return result;
     }
 }
