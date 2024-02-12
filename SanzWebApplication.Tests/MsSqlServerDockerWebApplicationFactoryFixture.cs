@@ -8,7 +8,7 @@ using SanzWebApplication.Models;
 using Testcontainers.MsSql;
 namespace SanzWebApplication.Tests;
 
-public abstract class MsSqlServerDockerWebApplicationFactoryFixture : WebApplicationFactory<SanzWebApplication.Program>,
+public class MsSqlServerDockerWebApplicationFactoryFixture : WebApplicationFactory<SanzWebApplication.Program>,
     IAsyncLifetime
 {
     private readonly MsSqlContainer _msSqlContainer = new MsSqlBuilder().Build();
